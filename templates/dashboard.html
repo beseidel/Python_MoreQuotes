@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style2.css') }}">
+
+        <title>dashboard</title>
+</head>
+
+
+<body>
+<div class="container">
+<!-- NAV SECTION -->
+<!-- contains navigation links and (potentially serch bar) -->
+    <div class="nav">
+        <!-- <div id="search_container">
+            <input class="search" type="search" name="Search" id="placeholder">
+            <button><input class="search_btn" type="submit" value="search"/>
+            </button>
+        </div> -->
+      
+        <a class="a"  href='/'>Home</a>&nbsp;&nbsp;&nbsp;
+        <a class="a"  href='/logout'>Log Out</a>
+        <a class="a"  href='/edit_user/session[id_mickey_user'>Edit 
+        My Account</a>
+        <a class="a"  href='/show_all_users'>Show All Users</a>&nbsp;&nbsp;&nbsp;
+       
+     
+        <br></br>
+
+        
+    </div>
+<!-- END NAVOGATION -->
+
+<!-- MAIN SECTION -->
+<div class="main">
+<!-- WELCOME BAR -->
+    <table class="wall_table"><th>Welcome </th> 
+        <th>{{session['mickeys_first_name']}}</th>
+        <th><a class="a"  href='/logout'>Log Out</a></th>
+       <th> <a class="a" href=/dashboard>Dashboard</a></th>
+    </table>
+
+
+
+<!-- SHOW ALL BOOKS -->
+        <div class ="books_table">
+            <br></br>
+            <h1>All QUOTES</h1>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="messages">{{message}}</p>                   
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+               
+    <br></br>
+<!-- START BOX WITH ALL QUOTES  -->
+<hr>
+    {% for quote in all_quotes %}
+    <hr>
+    <Table>
+        <tr>
+            <td>{{quote ['name']}}:</td>
+        </tr>
+        <tr>
+            <td>{{quote['quote_content']}}</td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+            <td>
+            <a href='/show_one_user/{{quote['id_user']}}'>show user</a>
+            POSTED BY USER: {{quote['first_name']}} {{quote['last_name']}}</td>
+        </tr>
+    </table>
+    {% endfor %}
+    <hr>
+        <br></br>
+      <!-- START FAVORITES HERE -->
+        <a href="/favorites">Add a Favorite</a>    
+        <input class="btn" type="submit" value="Add to favorites"/>
+    </div>
+
+        <!-- NEW BOOK BOX -->
+    <div class="form_content_box">
+        <form action='/add_quote' method="post">
+            <br></br>
+        <form_header>Add a Quote</form_header>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                            <p class="messages">{{message}}</p> 
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <br></br>
+       <table> <tr><td><label>Author</label>
+                </td></tr>
+               <tr><td><input class="input" type="text" name="q_name" placeholder="Insert Author" /></td></tr>
+                <!-- <input class="input" type="hidden" name="" placeholder="Insert Book Title"/> -->
+       <tr><td>             <br></br></tr></td>
+       <tr><td> <label>Insert Quote</label></td></tr>
+       <tr><td><textarea type='text' name="q_content" placeholder="Insert Quote" id="q_content" cols="40" rows="4"></textarea></td></td>
+                
+                    <br></br>
+       <tr><td> <input class="btn" type="submit" value="Submit"/></td></tr>
+        </form>
+        <h2>QUOTES FOR THOUGHT</h2>
+<br></br>
+    </table>
+
+</form>
+
+    </div>
+<!-- END BOOK BOX -->
+    </div>
+</div>
+</div>
+</body>
+
+</html>

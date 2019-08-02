@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Document</title>
+</head>
+<body>
+
+<div class="nav">
+ <!-- {% for user in all_users %}
+            <a href="/edit_user/{{user['id_user']}}">Edit</a>I<a href="/delete/{{user['id_user']}}">Delete</a>
+              {% endfor %}  -->
+           
+            <a class="a"  href="/">HOME</a>&nbsp;&nbsp;&nbsp;
+            <a class="a"  href="/show_all_users">SHOW ALL USERS</a>&nbsp;&nbsp;&nbsp;
+            <a class="a" href=/dashboard>DASHBOARD</a> &nbsp;&nbsp;&nbsp;
+            <a class="a"  href='/logout'>LOG OUT</a>
+
+</div>
+
+<div class='main'>
+<div class='box'>
+
+
+        {% for user in all_users %}
+        <h1>Show {{user['first_name']}}'s favorite Quotes</h1>
+       
+        <Table>
+            {% for quote in all_quotes %}
+            <tr>
+                <td><br></br></td>
+            </tr>
+            <tr>
+                <td>{{quote ['name']}}:</td>
+            </tr>
+            
+            <tr>
+                <td><br></br></tr>
+            <tr>
+                <td> {{quote['quote_content']}}</td>
+            </tr>
+            <tr>
+                <td><br></br><hr></td>
+             </tr>
+        </table>
+        {% endfor %}
+
+<br></br>
+<h1>User Contact Information</h1>
+<!-- #this is showing user information using the keys in the database -->
+    <p>  User: {{user['id_user']}}</p>
+    <p>  First Name:  {{ user['first_name'] }}</p>  
+    <p>  Last Name:  {{ user['last_name'] }}</p> 
+    <p>  Email:  {{ user['email'] }}</p> 
+    <p>  Created at: {{ user ['created_at']}} 
+    <p>  Last updated at {{ user ['updated_at']}}</p>
+
+<a href="/edit_user/{{user['id_user']}}">Edit</a>I<a href="/delete/{{user['id_user']}}">Delete</a>
+
+<br>
+</br>
+<br>
+</br>
+
+<h1>EDIT USER BELOW</h1>
+
+{% endfor %}  
+            
+<table>
+<tr>
+    <th>ID</th><th>Full Name</th><EMAIL></th><th>Created At</th><th>Actions</th>
+{% for user in all_users %}
+</tr>
+    <td>{{user['id_user']}}</td><td>{{ user['first_name'] }} {{ user['last_name'] }}</td><td>{{ user['email'] }}</td>
+
+    
+    <td><a href="/show_one_user/{{user['id_user']}}">Show</a>I<a href="/edit_user/{{user['id_user']}}">Edit</a>I<a href="/delete/{{user['id_user']}}">Delete</a></td>  
+    {% endfor %}
+
+</table>
+<br>
+</br>
+
+</div>
+<div class="foot">
+        {% for user in all_users %}
+       <a href="/edit_user/{{user['id_user']}}">Edit</a>I<a href="/delete/{{user['id_user']}}">Delete</a>
+                
+                   <a href="/">Home</a> 
+                   <a href="/">Add a User</a>
+                   <a href="/show_all_users">SHOW ALL USERS</a>
+                   {% endfor %} 
+       </div> 
+</div>
+
+
+
+<!-- see orange in server.py for matching variable.. -->
+<!-- #use the variables from the database for the for loop above -->
+
+    
+</body>
+</html>

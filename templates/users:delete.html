@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    USER Sucessfully deleted
+
+
+{% for user in all_users %}
+<h1>Edit User {{user['id_user']}}</h1>
+    <p>  User {{user['id_user']}}</p>
+    <p>  First Name  {{ user['first_name'] }}</p>  
+    <p>  Last Name  {{ user['last_name'] }}</p> 
+    <p>  Email  {{ user['email'] }}</p> 
+{% endfor %}
+
+<table>
+<tr>
+    <th>ID</th><th>Full Name</th><EMAIL></th><th>Created At</th><th>Actions</th>
+{% for user in all_users %}
+</tr>
+    <td>{{user['id_user']}}</td><td>{{ user['first_name'] }} {{ user['last_name'] }}</td><td>{{ user['email'] }}</td><td><a href="http:/users/create/show_one_user/{{user['id_user']}}">Show</a>I<a href="http:/users/edit_form/{{user['id_user']}}">Edit</a>I<a href="http:/users/delete/{{user['id_user']}}">Delete</a></td>  
+{% endfor %}
+</table>
+
+</body>
+</html>

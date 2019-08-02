@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>form</title>
+</head>
+
+<body>
+
+<div class="container">
+          
+<div class="nav">
+ {% for user in all_users %}
+            <a href="/edit_user/{{user['id_user']}}">Edit</a>I<a href="/delete/{{user['id_user']}}">Delete</a>
+              {% endfor %} 
+           
+            <a href="/">HOME</a>
+            <a href="/show_all_users">SHOW ALL USERS</a>
+           
+</div>
+
+    <div class='main'>
+
+    
+  
+ 
+        <div class='box'>
+      {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+    {% if messages %}                            <!-- check if there are any messages -->
+        {% for message in messages %}            <!-- loop through the messages -->
+            <p class="flash">{{message}}</p>                   <!-- display each message in a paragraph tag -->
+        {% endfor %}
+    {% endif %}
+{% endwith %}   
+            <form action="/create" method="post">
+                <h4>Add a User</h4>
+                <br></br>
+                <p>First Name: <input type="text" name="fname" placeholder="First Name" value=""/></p>
+                <br></br>
+                <p>Last Name:  <input type="text" name="lname" placeholder="Last Name" value=""/></p>
+                <br></br>
+                <p>Enter Email:  <input type="text" name="email" placeholder="Email" value=""/></p>
+                <br></br>
+                <p><input class="submit" type="submit" value="create_user"/></p>
+            </form>
+            
+        </div>
+        <div class="foot">
+                <h1>this is the footer</H1>
+            <!-- <table>
+            <tr>
+                <th>ID</th><th>Full Name</th><EMAIL></th><th>Created At</th><th>Actions</th>
+            {% for user in all_users %}
+            </tr>
+                <td>{{user['id_user']}}</td><td>{{ user['first_name'] }} {{ user['last_name'] }}</td><td>{{ user['email'] }}</td><td><a href="/show_one_user/{{user['id_user']}}">Show</a>I<a href="/edit_user/{{user['id_user']}}">Edit</a>I<a href="/delete/{{user['id_user']}}">Delete</a></td> 
+                <td><a href="/show_all_users">SHOW ALL USERS</a> </td>
+            {% endfor %}
+            </table> -->
+
+        </div>
+    </div>
+
+
+</div>
+</div>
+
+</body>
+
+</html>

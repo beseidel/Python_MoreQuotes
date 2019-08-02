@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style2.css') }}">
+
+        <title>dashboard</title>
+        <a class="a" href=/dashboard>Dashboard</a>
+</head>
+
+
+<body>
+<div class="container">
+<!-- NAV SECTION -->
+<!-- contains navigation links and (potentially serch bar) -->
+    <div class="nav">
+        <!-- <div id="search_container">
+            <input class="search" type="search" name="Search" id="placeholder">
+            <button><input class="search_btn" type="submit" value="search"/>
+            </button>
+        </div> -->
+
+        <a class="a"  href="/">Home</a>&nbsp;&nbsp;&nbsp;
+        <a class="a"  href='/logout'>Log Out</a>
+        
+    
+       
+
+
+
+        <br></br>
+    </div>
+<!-- END NAVOGATION -->
+
+<!-- MAIN SECTION -->
+<div class="main">
+<!-- WELCOME BAR -->
+    <table class="wall_table"><th>Updates by </th> 
+        <th>{{session['mickeys_first_name']}}</th>
+        <th><a class="a"  href='/logout'>Log Out</a></th>
+    </table>
+
+    {% for book in books %}
+        <form action='/edit/{{book['id_book']}}' method="post">
+    {% endfor %}
+
+<!-- UPDATE BOOK BOX -->
+
+    <div class="register_box">
+   
+            <br></br>
+         
+
+        <form_header>UPDATE BOOK BELOW</form_header>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                            <p class="messages">{{message}}</p> 
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <br></br>
+        <label>Title</label>
+        
+        
+    <form action="/edit/update/{{book['id_book']}}" method="post">
+                <input class="input" type="text" name="book_name" placeholder="Update Book Title"/>
+                <input class="input" type="hidden" name="" placeholder="Insert Book Title"/>
+                    <br></br>
+        <label>Description</label>
+                <input class="input" type="text" name="book_summary" placeholder="Update Book Description"/>
+                    <br></br>
+        <input class="btn" type="submit" value="Update"/>
+     
+    </form>
+    
+  
+     
+</div>
+
+<!-- END BOOK BOX -->
+
+
+<!-- SHOW ALL BOOKS -->
+    <div class='box2'>
+        <div class ="books_table">
+        <br></br>
+        <h1>Book To Update</h1>
+          <!-- {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="messages">{{message}}</p>                   
+                {% endfor %}
+            {% endif %}
+        {% endwith %} -->     
+        <br></br>
+        <br></br>
+            {% for book in all_books %}
+            <table>
+            <tr>
+                <td><a class="a" href='/edit/{{book['id_book']}}'>Edit</a></td>
+            </tr>
+            <tr>
+                <td><b>Book Title:</b>{{book['book_title']}} <a class="a"  href='/edit/{{book['id_book']}}'></td>
+            </tr>
+            <tr>
+                <td><b>Book Description:</b> {{book['book_description']}}</td>
+            </tr>
+            <tr>
+                <td><b>Added by: </b>{{book['first_name']}}{{all_books[0]['last_name']}}<br></br></td>
+            </tr>
+       
+            <hr>
+            </hr>
+            </table>
+            {% endfor %}
+  
+        <table>
+          {% for book in books %}
+        <tr><td>Book ID is {{book['id_book']}}</td></tr>
+        <tr>
+            <td><b>Book Title:</b> {{book['book_title']}}</td>
+        </tr>
+        <tr>
+            <td><b>Book Description:</b> {{book['book_description']}}</td>
+        </tr>
+        <tr>
+            <td><b>Added by: </b>{{book['first_name']}}{{all_books[0]['last_name']}}<br></br></td>
+        </tr>
+        <hr>
+        </hr>
+         {% endfor %}
+        </table>
+      
+        
+    <!-- <table>
+        <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Created At</th>
+            <th>Actions</th>
+        </tr>
+
+    </table> -->
+            <hr>
+            </hr>
+            <br>
+            </br>
+            <a href="/favorites">Add a Favorite</a>    
+            <input class="btn" type="submit" value="Add to favorites"/>
+            
+        </div>
+    </div>
+</body>
+</html>
